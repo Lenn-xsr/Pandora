@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Red",
+    "hash": "#e21515"
+  },
+  {
+    "name": "Yellow",
+    "hash": "#e2bd15"
+  },
+  {
+    "name": "Green",
+    "hash": "#38e215"
+  },
+  {
+    "name": "Aqua",
+    "hash": "#15e2bb"
+  },
+  {
+    "name": "Blue",
+    "hash": "#1545e2"
+  },
+  {
+    "name": "Light purple",
+    "hash": "#a315e2"
+  },
+  {
+    "name": "Light pink",
+    "hash": "#e215d9"
+  },
+  {
+    "name": "Pink",
+    "hash": "#e2157a"
+  },
+  {
+    "name": "Purple",
+    "hash": "#7319b5"
+  },
+  {
+    "name": "Green water",
+    "hash": "#19b57e"
+  },
+  {
+    "name": "Burnt yellow",
+    "hash": "#eea408"
+  },
+  {
+    "name": "Black",
+    "hash": "#000000"
+  },
+  {
+    "name": "White",
+    "hash": "#FFFFFF"
+  },
+  {
+    "name": "Grey",
+    "hash": "#c6c4c7"
+  },
+  {
+    "name": "Baby blue",
+    "hash": "#3989ac"
+  }
+]
