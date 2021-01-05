@@ -71,6 +71,9 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex';
+
 export default {
 	name: 'CadastroCatg',
 	data(){
@@ -79,14 +82,12 @@ export default {
 		}
 	},
 	computed: {
-		user(){
-      return this.$store.state.user
-    }
+		...mapState(['user'])
 	},
 	methods: {
 		toNext(){
 			this.$emit("Next","CadastroColor")
-			this.$store.state.user.categories = this.categories
+			this.user.categories = this.categories
 		}
 	}
 }

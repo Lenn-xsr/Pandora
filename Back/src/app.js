@@ -56,7 +56,7 @@ app.use('/auth', authRoute)
 
 app.post("/finish",async (req,res)=>{
   const mongUser = await DiscordUser.findOne({ _id: req.user._id});
-  const guild = client.guilds.cache.get("604300993944879104");
+  const guild = client.guilds.cache.get(process.env.GUILD_MASTER);
   const roles = [];
   const member = guild.members.cache.get(req.user._id);
 
@@ -71,10 +71,12 @@ app.post("/finish",async (req,res)=>{
 app.get("/userinfo",function(req,res){
   if (req.user){
     user = client.users.cache.get(req.user._id)
+
     return res.json({
       tag: user.tag, 
       avatar: user.displayAvatarURL()
     })
+    
   }
   res.json({})
 })

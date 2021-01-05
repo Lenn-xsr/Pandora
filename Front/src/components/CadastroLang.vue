@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: "CadastroLang",
   data() {
@@ -39,14 +41,12 @@ export default {
     };
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
+    ...mapState(['user'])
   },
   methods: {
     toNext() {
       this.$emit("Next", "CadastroCatg");
-      this.$store.state.user.language = this.language;
+      this.user.language = this.language;
     },
   },
 };

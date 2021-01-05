@@ -8,9 +8,9 @@ const Users = new Schema({
   registred: { type: Boolean, required: true}
 })
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function (error) {
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
   if (error) {
-    console.error("Erro ao conectar ao banco de dados ");
+    console.error("Erro ao conectar ao banco de dados");
     console.error(error)
   } else {
     console.info("Conectado ao banco de dados!");

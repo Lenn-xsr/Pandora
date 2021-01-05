@@ -1,41 +1,41 @@
 <template>
-  <component :is="nowActive" @Next="recNext"></component>
+  <component :is='nowActive' @Next='recNext'></component>
 </template>
 
 <script>
-import CadastroLang from '@/components/CadastroLang.vue'
-import CadastroCatg from '@/components/CadastroCatg.vue'
-import CadastroColor from '@/components/CadastroColor.vue'
-import Finalizado from '@/components/Finalizado.vue'
-import axios from "axios";
+import { mapState } from 'vuex'
+import axios from 'axios';
 
 export default {
   name: 'Cadastrar',
   data(){
     return {
       user: true,
-      nowActive: "CadastroLang"
+      nowActive: 'CadastroLang'
     }
+  },
+  computed: {
+    ...mapState(['user'])
   },
   methods: {
     recNext(next){
       this.nowActive = next
     },
     async getInfos(){
-      const a = await axios.get("/userinfo")
+      const a = await axios.get('/userinfo')
       if (a.data.tag){
-        this.$store.state.user.tag = a.data.tag
-        this.$store.state.user.avatar = a.data.avatar
+        this.user.tag = a.data.tag
+        this.user.avatar = a.data.avatar
       }else{
-        console.log("[ERROR] Cannot get user infos")
+        console.log('[ERROR] Cannot get user infos')
       }
     }
   },
   components: {
-    CadastroLang,
-    CadastroCatg,
-    CadastroColor,
-    Finalizado
+    CadastroLang: () => import('@/components/CadastroLang.vue'),
+    CadastroCatg: () => import('@/components/CadastroCatg.vue'),
+    CadastroColor: () => import('@/components/CadastroColor.vue'),
+    Finalizado: () => import('@/components/Finalizado.vue')
   },
   created(){
     this.getInfos()

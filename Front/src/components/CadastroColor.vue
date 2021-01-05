@@ -47,6 +47,7 @@
 <script>
 
 import colors from "../colors.json"
+import { mapState } from 'vuex'
 
 export default {
 	name: 'CadastroColor',
@@ -63,7 +64,7 @@ export default {
 		},
 		toNext(){
 			this.$emit("Next","Finalizado")
-			this.$store.state.user.color = this.selected[0].name
+			this.user.color = this.selected[0].name
 		}
 	},
 	computed: {
@@ -75,9 +76,7 @@ export default {
 		categories(){
 			return this.$store.state.user.categories
 		},
-    user(){
-      return this.$store.state.user
-    }
+    ...mapState(['user'])
   },
 	watch: {
 		hash(){

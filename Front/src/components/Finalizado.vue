@@ -3,7 +3,7 @@
     <figure>
       <img :src="user.avatar" />
     </figure>
-    <div v-if="finalizado">
+    <div v-if="!finish">
       <div class="cadTitle">
         <h3>Tudo pronto!</h3>
         <small>Basta clicar em finalizar para salvar as informações e liberar os canais!</small>
@@ -25,27 +25,22 @@
 
 <script>
 import axios from "axios";
+import { mapState } from 'vuex'
 
 export default {
   name: "Finalizado",
   data() {
     return {
-      finalizado: true,
+      finish: false,
     };
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
+    ...mapState(['user'])
   },
   methods: {
     sendInfo() {
-      axios.post("/finish", {
-        language: this.user.language,
-        categories: this.user.categories,
-        color: this.user.color
-      });
-      this.finalizado = false;
+      axios.post("/finish", this.user);
+      this.finish = true;
     },
   },
 };
