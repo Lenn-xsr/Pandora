@@ -6,7 +6,10 @@
     <div v-if="!finish">
       <div class="cadTitle">
         <h3>Tudo pronto!</h3>
-        <small>Basta clicar em finalizar para salvar as informações e liberar os canais!</small>
+        <small
+          >Basta clicar em finalizar para salvar as informações e liberar os
+          canais!</small
+        >
       </div>
 
       <div class="cadButton">
@@ -25,17 +28,17 @@
 
 <script>
 import axios from "axios";
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
-  name: "Finalizado",
+  name: "Finish",
   data() {
     return {
       finish: false,
     };
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(["user"]),
   },
   methods: {
     sendInfo() {
