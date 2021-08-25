@@ -1,20 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const { Schema } = mongoose
+const { Schema } = mongoose;
 
 const Users = new Schema({
   _id: { type: String, required: true },
   username: { type: String, required: true },
-  registred: { type: Boolean, required: true}
-})
+  registred: { type: Boolean, required: true },
+});
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
-  if (error) {
-    console.error("Erro ao conectar ao banco de dados");
-    console.error(error)
-  } else {
-    console.info("Conectado ao banco de dados!");
+mongoose.connect(
+  process.env.MONGO_URI,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (error) => {
+    if (error) {
+      console.error("[MONGO] Erro ao conectar ao banco de dados");
+      console.error(error);
+    } else {
+      console.info("[MONGO] Conectado!");
+    }
   }
-})
+);
 
-const DiscordUser = module.exports = mongoose.model('User', Users)
+const DiscordUser = (module.exports = mongoose.model("User", Users));

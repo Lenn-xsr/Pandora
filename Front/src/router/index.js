@@ -7,7 +7,6 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/signup",
-    name: "Signup",
     component: Signup,
     children: [
       {

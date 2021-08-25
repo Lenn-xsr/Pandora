@@ -2,86 +2,70 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 const session = require("express-session");
 const mongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const passport = require("passport");
-const discordStrategy = require("./strategies/discordStrategy");
-const DiscordUser = require("./database/mongo");
-const client = require("./bot/client");
 
 const authRoute = require("./routes/auth");
-const finishRoute = require("./routes/finish");
 
-function isAuthorized(req, res, next) {
-  if (req.user) {
-    console.log(req.user.registred);
-    if (req.user.registred) return res.redirect("/home");
-    else next();
-  } else {
-    res.redirect("/auth");
-  }
-}
-
-app.use("/assets", express.static(__dirname + "/dist"));
-
+app.use(cors({ credentials: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(
   session({
-    secret: "some random secret",
-    cookie: {
-      maxAge: 60000 * 60 * 24,
-    },
-    store: new mongoStore({ mongooseConnection: mongoose.connection }),
+    name: "insightz.sid",
+    secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 60000 * 60 * 24,
+      secure: false,
+      sameSite: "lax",
+    },
+    store: new mongoStore({
+      mongooseConnection: mongoose.connection,
+      clear_interval: 3600,
+    }),
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", isAuthorized, (req, res) => {
-  res.sendFile(__dirname + "/dist/index.html");
+app.use((req, res, next) => {
+  res.set("x-powered-by", "Pandora");
+  next();
 });
 
-app.use("/auth", authRoute);
+app.use("/api", authRoute);
 
-app.post("/finish", async (req, res) => {
-  const mongUser = await DiscordUser.findOne({ _id: req.user._id });
-  const guild = client.guilds.cache.get(process.env.GUILD_MASTER);
-  const roles = [];
-  const member = guild.members.cache.get(req.user._id);
+// Vue-Router
 
-  mongUser.registred = true;
-  mongUser.save();
+const staticFileMiddleware = express.static(__dirname + "/dist");
 
-  req.body.categories.push(req.body.color, req.body.language);
-  req.body.categories.forEach((r) =>
-    roles.push(guild.roles.cache.find((s) => s.name === r).id)
-  );
-  member.roles.add(roles);
+app.use(staticFileMiddleware);
+
+const historyMiddleware = history({
+  disableDotRule: true,
+  verbose: true,
 });
 
-app.get("/userinfo", function (req, res) {
-  if (req.user) {
-    user = client.users.cache.get(req.user._id);
-
-    return res.json({
-      tag: user.tag,
-      avatar: user.displayAvatarURL(),
-    });
-  }
-  res.json({});
+app.use((req, res, next) => {
+  historyMiddleware(req, res, next);
 });
+
+app.use(staticFileMiddleware);
+
+// End-Vue-Router
 
 app.get("*", function (req, res) {
   res.status(404).sendFile(__dirname + "/routes/404.html");
 });
 
 app.listen(PORT, () => {
-  console.log("App aberto na porta " + PORT);
+  console.log("[APP] Aberto na porta " + PORT);
 });

@@ -1,5 +1,5 @@
 <template>
-  <div class="cadBox">
+  <article class="cadBox">
     <figure>
       <img :src="user.avatar" alt="User avatar" />
     </figure>
@@ -81,7 +81,7 @@
     <div class="cadButton">
       <button @click="toNext">Próximo</button>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="cadBox">
+  <article class="cadBox">
     <figure>
       <img :src="user.avatar" />
     </figure>
@@ -23,7 +23,7 @@
         <small>Verifique o servidor, está tudo pronto :)</small>
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

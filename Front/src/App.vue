@@ -1,17 +1,17 @@
 <template>
-  <div id="app">
+  <main id="app">
     <div>
       <figure>
-        <img src="./assets/Logo.svg" alt="Pandora logo" />
+        <img src="@/assets/Logo.svg" alt="Pandora logo" />
       </figure>
     </div>
     <transition mode="out-in">
       <router-view />
     </transition>
     <div class="background">
-      <img src="./assets/background.jpg" />
+      <img src="@/assets/background.jpg" />
     </div>
-  </div>
+  </main>
 </template>
 
 <style>

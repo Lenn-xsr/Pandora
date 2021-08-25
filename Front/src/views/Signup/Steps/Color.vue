@@ -1,5 +1,5 @@
 <template>
-  <div class="cadBox">
+  <article class="cadBox">
     <div class="cadTitle">
       <h3>Cor</h3>
       <small
@@ -46,7 +46,7 @@
     <div class="cadButton">
       <button @click="toNext">Próximo</button>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

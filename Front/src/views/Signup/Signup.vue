@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <router-view />
-  </main>
+  <router-view />
 </template>
 
 <script>
@@ -19,7 +17,7 @@ export default {
     },
   },
   created() {
-    this.getInfos();
+    this.getUserInfos();
   },
 };
 </script>
