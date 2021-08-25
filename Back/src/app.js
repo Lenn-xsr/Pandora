@@ -1,15 +1,20 @@
 require("dotenv").config();
+require("./database/mongo");
+require("./bot/client");
 
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const PORT = process.env.PORT;
 
+const history = require("connect-history-api-fallback");
 const session = require("express-session");
 const mongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const passport = require("passport");
 
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/user");
 
 app.use(cors({ credentials: true }));
 app.use(express.urlencoded({ extended: true }));
@@ -42,6 +47,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", authRoute);
+app.use("/api", userRoute);
 
 // Vue-Router
 
