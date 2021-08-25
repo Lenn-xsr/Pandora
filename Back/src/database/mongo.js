@@ -21,4 +21,4 @@ mongoose.connect(
   }
 );
 
-const DiscordUser = (module.exports = mongoose.model("User", Users));
+module.exports = mongoose.model("Users", Users);
