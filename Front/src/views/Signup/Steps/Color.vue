@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import colors from "../colors.json";
+import colors from "@/colors.json";
 import { mapState } from "vuex";
 
 export default {

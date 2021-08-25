@@ -15,7 +15,7 @@ export default new Vuex.Store({
   },
   mutations: {
     UPDATE_USER(state, payload) {
-      state.user = concat(state.user, payload);
+      state.user = Object.assign(state.user, payload);
     },
   },
 });

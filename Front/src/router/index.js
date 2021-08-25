@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Signup from "@/views/Signup.vue";
+import Signup from "@/views/Signup/Signup.vue";
 
 Vue.use(VueRouter);
 

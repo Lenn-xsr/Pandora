@@ -13,13 +13,13 @@
       <label>
         <input type="radio" name="language" v-model="language" value="BR" />
         <figure>
-          <img src="../assets/flagBrasil.svg" class="flag" />
+          <img src="@/assets/flagBrasil.svg" class="flag" />
         </figure>
       </label>
       <label>
         <input type="radio" name="language" v-model="language" value="USA" />
         <figure>
-          <img src="../assets/flagUS.svg" class="flag" />
+          <img src="@/assets/flagUS.svg" class="flag" />
         </figure>
       </label>
     </div>
