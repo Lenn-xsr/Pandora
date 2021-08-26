@@ -24,7 +24,7 @@ app.use(express.json());
 
 app.use(
   session({
-    name: "insightz.sid",
+    name: "pandora.sid",
     secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: false,
