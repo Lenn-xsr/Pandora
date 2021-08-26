@@ -9,7 +9,7 @@ $ npm install
 $ npm run build
 ```
 
-Move the **/dist** folder to **/Back**, insert the data into the .env file ( located in **/Back** ) and start the server.
+Insert the data into the .env file ( located in **/Back** ) and start the server.
 
 ```sh
 $ npm install
