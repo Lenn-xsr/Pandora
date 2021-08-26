@@ -16,6 +16,7 @@ const passport = require("passport");
 
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const signupRoute = require("./routes/signup");
 
 app.use(cors({ credentials: true }));
 app.use(express.urlencoded({ extended: true }));
@@ -49,6 +50,7 @@ app.use((req, res, next) => {
 
 app.use("/auth", authRoute);
 app.use("/api", userRoute);
+app.use("/api", signupRoute);
 
 // Vue-Router
 
@@ -56,6 +58,11 @@ app.use((req, res, next) => {
   if (req?.user && req.user?.registred) res.redirect("/home");
   else if (!req?.user) res.redirect("/auth");
   else next();
+});
+
+app.get("/home", (req, res) => {
+  if (!req.user.registred) return res.redirect("/");
+  res.json(req.user);
 });
 
 const staticFileMiddleware = express.static(__dirname + "/dist");
@@ -75,7 +82,7 @@ app.use(staticFileMiddleware);
 
 // End-Vue-Router
 
-app.get("*", function (req, res) {
+app.get("*", (req, res) => {
   res.status(404).sendFile(__dirname + "/routes/404.html");
 });
 
