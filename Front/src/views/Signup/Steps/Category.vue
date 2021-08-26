@@ -79,28 +79,26 @@
       </ul>
     </div>
     <div class="cadButton">
-      <button @click="toNext">Próximo</button>
+      <button @click="nextRoute">Próximo</button>
     </div>
   </article>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import signupActions from "@/mixins/signupActions.js";
 
 export default {
   name: "Category",
+  mixins: [signupActions],
   data() {
     return {
       categories: [],
     };
   },
-  computed: {
-    ...mapState(["user"]),
-  },
   methods: {
-    toNext() {
-      this.$emit("Next", "CadastroColor");
-      this.user.categories = this.categories;
+    nextRoute() {
+      this.updateUser({ categories: this.categories });
+      this.$router.push({ name: "Color" });
     },
   },
 };

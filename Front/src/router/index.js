@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/signup",
+    path: "/",
     component: Signup,
     children: [
       {

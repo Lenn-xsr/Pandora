@@ -33,8 +33,10 @@
           <h2>Cargos</h2>
           <div>
             <ul class="cadRoles">
-              <li :style="cargStyle">{{ selected[0].name }}</li>
-              <li v-for="categorie in categories" :key="categorie">
+              <li :style="{ '--color-active': selected[0].hash }">
+                {{ selected[0].name }}
+              </li>
+              <li v-for="categorie in user.categories" :key="categorie">
                 {{ categorie }}
               </li>
             </ul>
@@ -44,17 +46,18 @@
     </div>
 
     <div class="cadButton">
-      <button @click="toNext">Próximo</button>
+      <button @click="nextRoute">Próximo</button>
     </div>
   </article>
 </template>
 
 <script>
 import colors from "@/colors.json";
-import { mapState } from "vuex";
+import signupActions from "@/mixins/signupActions.js";
 
 export default {
   name: "Color",
+  mixins: [signupActions],
   data() {
     return {
       hash: "#e2bd15",
@@ -66,21 +69,12 @@ export default {
     getColor(hash) {
       this.selected = colors.filter((r) => r.hash === hash);
     },
-    toNext() {
-      this.$emit("Next", "Finalizado");
-      this.user.color = this.selected[0].name;
+    nextRoute() {
+      this.updateUser({
+        color: this.selected[0].name,
+      });
+      this.$router.push({ name: "Finish" });
     },
-  },
-  computed: {
-    cargStyle() {
-      return {
-        "--color-active": this.selected[0].hash,
-      };
-    },
-    categories() {
-      return this.$store.state.user.categories;
-    },
-    ...mapState(["user"]),
   },
   watch: {
     hash() {

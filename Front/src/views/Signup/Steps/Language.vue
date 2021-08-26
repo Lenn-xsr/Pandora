@@ -25,28 +25,26 @@
     </div>
 
     <div class="cadButton">
-      <button @click="toNext">Próximo</button>
+      <button @click="nextRoute">Próximo</button>
     </div>
   </article>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import signupActions from "@/mixins/signupActions.js";
 
 export default {
   name: "Language",
+  mixins: [signupActions],
   data() {
     return {
       language: "BR",
     };
   },
-  computed: {
-    ...mapState(["user"]),
-  },
   methods: {
-    toNext() {
-      this.$emit("Next", "CadastroCatg");
-      this.user.language = this.language;
+    nextRoute() {
+      this.updateUser({ language: this.language });
+      this.$router.push({ name: "Category" });
     },
   },
 };

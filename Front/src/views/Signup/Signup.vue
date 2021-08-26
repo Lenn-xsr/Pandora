@@ -10,13 +10,17 @@ export default {
   name: "Signup",
   mixins: [signupActions],
   methods: {
-    async getUserInfos() {
-      api.get("/userinfo").then((res) => {
-        if (res.data.tag) this.user = { ...res.data };
+    getUserInfos() {
+      api.get("/user").then((res) => {
+        if (res.data.tag) this.updateUser(res.data);
       });
     },
+    checkRoute() {
+      if (this.$route.path != "/") this.$router.push("/");
+    },
   },
-  created() {
+  async created() {
+    await this.checkRoute();
     this.getUserInfos();
   },
 };

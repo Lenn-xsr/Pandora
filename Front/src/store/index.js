@@ -6,9 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {
-      language: "BR",
+      language: null,
       categories: [],
-      color: "",
+      color: null,
       tag: null,
       avatar: null,
     },
@@ -16,6 +16,11 @@ export default new Vuex.Store({
   mutations: {
     UPDATE_USER(state, payload) {
       state.user = Object.assign(state.user, payload);
+    },
+  },
+  actions: {
+    updateUser(context, payload) {
+      context.commit(`UPDATE_USER`, payload);
     },
   },
 });

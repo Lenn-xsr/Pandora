@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-router.get("/auth", passport.authenticate("discord"));
+router.get("/", passport.authenticate("discord"));
 
 router.get(
   "/redirect",

@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("./database/mongo");
 require("./bot/client");
+require("./strategies/discordStrategy");
 
 const express = require("express");
 const app = express();
@@ -46,10 +47,16 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", authRoute);
+app.use("/auth", authRoute);
 app.use("/api", userRoute);
 
 // Vue-Router
+
+app.use((req, res, next) => {
+  if (req?.user && req.user?.registred) res.redirect("/home");
+  else if (!req?.user) res.redirect("/auth");
+  else next();
+});
 
 const staticFileMiddleware = express.static(__dirname + "/dist");
 

@@ -3,7 +3,7 @@
     <figure>
       <img :src="user.avatar" />
     </figure>
-    <div v-if="!finish">
+    <div v-if="!finished">
       <div class="cadTitle">
         <h3>Tudo pronto!</h3>
         <small
@@ -27,23 +27,21 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapState } from "vuex";
+import { api } from "@/services.js";
+import signupActions from "@/mixins/signupActions.js";
 
 export default {
   name: "Finish",
+  mixins: [signupActions],
   data() {
     return {
-      finish: false,
+      finished: false,
     };
-  },
-  computed: {
-    ...mapState(["user"]),
   },
   methods: {
     sendInfo() {
-      axios.post("/finish", this.user);
-      this.finish = true;
+      api.post("/signup", this.user);
+      this.finished = true;
     },
   },
 };

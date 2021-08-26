@@ -12,6 +12,7 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use(
+  "discord",
   new DiscordStrategy(
     {
       clientID: process.env.CLIENT_ID,

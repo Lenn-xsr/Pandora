@@ -1,17 +1,10 @@
-import { mapMutations } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
-  comuted: {
-    user: {
-      get() {
-        return this.$store.state.user;
-      },
-      set(object) {
-        this.UPDATE_USER(object);
-      },
-    },
+  computed: {
+    ...mapState(["user"]),
   },
   methods: {
-    ...mapMutations(["UPDATE_USER"]),
+    ...mapActions(["updateUser"]),
   },
 };
